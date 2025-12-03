@@ -57,7 +57,7 @@ export async function createTask(title: string): Promise<Task> {
             }
 
             tasksDb = [newTask, ...tasksDb]
-            //Atualiza a promise cacheada
+            //Atualiza a promise cacheada.
             tasksPromise = Promise.resolve(tasksDb)
 
             resolve(newTask)
