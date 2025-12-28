@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.tsx
+import { Suspense } from 'react';
+import { NewTaskForm } from './components/NewTaskForm';
+import { FocusInputDemo } from './components/FocusInputDemo';
+import TaskList from "./components/TaskList.tsx";
+import { TasksProvider } from "./context/TaskContext.tsx";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+    return (
+        <Suspense fallback={<p style={{ padding: '2rem' }}>A carregar tarefas...</p>}>
+            <TasksProvider>
+                <main
+                    style={{
+                        maxWidth: 720,
+                        margin: '2rem auto',
+                        padding: '0 1rem',
+                        fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, sans-serif',
+                    }}
+                >
+                    <h1>React 19 Task Board</h1>
+                    <p style={{ color: '#555', marginBottom: '1rem' }}>
+                        Exemplo prático dos novos recursos do React 19:
+                        Actions, useActionState, useFormStatus, useOptimistic, use,
+                        Context como &lt;Context&gt; e ref como prop.
+                    </p>
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+                    <NewTaskForm />
+                    <TaskList />
+                    <hr style={{ margin: '2rem 0' }} />
+                    <FocusInputDemo />
+                </main>
+            </TasksProvider>
+        </Suspense>
+    );
 }
-
-export default App
